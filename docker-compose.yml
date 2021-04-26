@@ -40,7 +40,7 @@ services:
 
     # Servicio Prestashop. Depende de la base de datos.
   prestashop:
-    image: wordpress
+    image: prestashop/prestashop
     ports:
         - "80:80"
     environment:
