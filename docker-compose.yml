@@ -1,6 +1,3 @@
-# Cogemos la plantilla básica de docker-compose.yml.
-# Para otras practicas, docker-compose.env guardará las variables de entorno.
-# La versión puede ser necesaria para compatibilidad
 version: '3.4'
 
 # Cada servicio requiere un contenedor
@@ -25,38 +22,37 @@ services:
     # Si hay fallo en el servicio, se reinicia.
     restart: always
 
-    # Servicio MySQL
+    # Servicio MySQL. Esta vez usaremos variables de entorno.
   mysql:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: mysql:5.7
     ports:
       - "3306:3306"
     environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=wp_database
-        - MYSQL_USER=wp_user
-        - MYSQL_PASSWORD=wp_password
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE={MYSQL_DATABASE}
+        - MYSQL_USER={MYSQL_USER}
+        - MYSQL_PASSWORD={MYSQL_PASSWORD}
     volumes:
         - mysql_data:/var/lib/mysql
     networks:
         - backend-network
     restart: always
 
-    # Servicio Wordpress
-  wordpress:
+    # Servicio Prestashop. Depende de la base de datos.
+  prestashop:
     image: wordpress
     ports:
         - "80:80"
     environment:
-        - WORDPRESS_DB_NAME=wp_database
-        - WORDPRESS_DB_USER=wp_user
-        - WORDPRESS_DB_PASSWORD=wp_password
+        - DB_SERVER=${DB_SERVER}
     volumes:
-        - wordpress_data:/var/www/html
+        - prestashop_data:/var/www/html
     networks:
         - frontend-network
         - backend-network
     restart: always
+    depends_on:
+        - mysql
 
 # Definimos las dos redes necesarias. Ojo con la indentación
 networks:
@@ -66,7 +62,7 @@ networks:
 # Definimos los volúmenes disponibles
 volumes:    
     mysql_data:
-    wordpress_data:
+    prestashop_data:
 
 
 
