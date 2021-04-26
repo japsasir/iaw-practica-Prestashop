@@ -55,12 +55,31 @@ Deberá indicar el orden en el que se deben iniciar los servicios con la opción
 https://docs.docker.com/compose/startup-order/
 
 
+**A tener en cuenta para la instalación de PrestaShop**
+
+La máquina pedirá la dirección y credenciales de la base de datos. Podemos obtener la dirección de mysql para backend siguiendo los pasos indicados al final de presta.sh y las credenciales son las del archivo .env
+
+![](https://i.imgur.com/FoBMSat.png)
+Obteniendo dirección mysql
+
+![](https://i.imgur.com/VE8xZC3.png)
+Credenciales.
+
+![](https://i.imgur.com/qKtwsoJ.png)
+Eliminando install.
+
+docker exec -it <$numero_contenedor> /bin/bash
+rm -rf install
+![](https://i.imgur.com/goooHo3.png)
+
+Ejemplo de eliminación de install.
+
 **Archivos en el repositorio**
 ------------
 1. **README.md** Documentación.
 2. **presta.sh** Ejecutable para instalar docker y docker-compose
 3. **docker-compose.yml** Archivo de referencia para docker-compose
-4. **docker.env** Archivo que almacena las variables de entorno.
+4. **.env** Archivo que almacena las variables de entorno.
 
 **Referencias**
 ------------
@@ -73,4 +92,3 @@ https://josejuansanchez.org/iaw/practica-15/index.html
 ------------
 - Markdown editor.
 https://markdown-editor.github.io/
-

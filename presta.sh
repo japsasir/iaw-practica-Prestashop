@@ -18,3 +18,8 @@ docker-compose up -d
 ## Para finalizar docker-compose ##
 #docker-compose down -v 
 #con -v elimina los volúmenes a la vez, útil para prácticas.
+
+## Para ver la dirección backend que pide la instalación de PrestaShop
+# sudo docker network ls
+# sudo docker network inspect iaw-practica-prestashop_backend-network
+# Allí buscaremos la entrada de iaw-practica-prestashop_mysql y usaremos esa dirección en la instalación
